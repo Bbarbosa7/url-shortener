@@ -2,22 +2,22 @@ version: '3.3'
 
 services:
 
-  app-shortener:
+  appshortener:
     build:
       context: .
       dockerfile: .docker/Dockerfile
-    image: 'arco-tech-url-shortener'
+    image: 'arcourl'
     ports:
-      - "8088:80"
+      - "8080:80"
     volumes:
       - ./:/var/www/html
 
 
-  db-shortener:
+  dbshortener:
     image: mysql:8.0
     restart: always
     ports:
-      - "3307:3307"
+      - "3307:3306"
     environment:
-      MYSQL_DATABASE: 'arco-tech-url-shortener'
-      MYSQL_ROOT_PASSWORD: "arcotech"
+      MYSQL_DATABASE: 'arcourl'
+      MYSQL_ROOT_PASSWORD: "arco"
