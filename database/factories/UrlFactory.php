@@ -1,0 +1,31 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Url;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class UrlFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Url::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'slug'  => $this->faker->domainWord(), //ean8(),
+            'url'   => str_replace(['http://', 'https://'], '', trim($this->faker->url())),
+            'valid' => Carbon::now()->addMinutes(random_int(1, 100)),
+        ];
+    }
+}
