@@ -2,17 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Url;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class UserFactory extends Factory
+class UrlFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = User::class;
+    protected $model = Url::class;
 
     /**
      * Define the model's default state.
@@ -22,8 +23,9 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
-            'email' => $this->faker->unique()->safeEmail,
+            'slug'  => $this->faker->domainWord(), //ean8(),
+            'url'   => str_replace(['http://', 'https://'], '', trim($this->faker->url())),
+            'valid' => Carbon::now()->addMinutes(random_int(1, 100)),
         ];
     }
 }
